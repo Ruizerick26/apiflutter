@@ -1,10 +1,9 @@
 class Pokemon{
-  final String name;
   final String url;
 
-    Pokemon({required this.name, required this.url});
+    Pokemon({required this.url});
 
-    factory Pokemon.fromJson(Map<String, dynamic> json){
-      return Pokemon(name: json['status'], url: json['messaje']);
-    }
+    // factory Pokemon.fromJson(Map<String, dynamic> json){
+    //   return Pokemon(url: json['urls']);
+    // }
 }

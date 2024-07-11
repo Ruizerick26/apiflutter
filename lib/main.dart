@@ -5,10 +5,12 @@ import 'providers/pokemon_provider.dart';
 import 'models/pokemon.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -24,27 +26,30 @@ class MyApp extends StatelessWidget {
 }
 
 class PokemonListScreen extends StatelessWidget {
+  const PokemonListScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pokémon List'),
+        title: const Text('Dog List'),
       ),
       body: Consumer<PokemonProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           return ListView.builder(
             itemCount: provider.pokemonList.length,
+            itemExtent: 100.0,
             itemBuilder: (context, index) {
               Pokemon pokemon = provider.pokemonList[index];
               return ListTile(
-                title: Text(pokemon.name),
+                title: Image.network(pokemon.url),
+                //visualDensity: const VisualDensity(vertical: -3),
                 onTap: () {
                   // Puedes agregar una navegación a un detalle de Pokémon aquí
-                  Image.network(pokemon.url);
                 },
               );
             },
@@ -55,7 +60,7 @@ class PokemonListScreen extends StatelessWidget {
         onPressed: () {
           Provider.of<PokemonProvider>(context, listen: false).fetchPokemon();
         },
-        child: Icon(Icons.refresh),
+        child: const Icon(Icons.refresh),
       ),
     );
   }
